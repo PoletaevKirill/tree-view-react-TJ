@@ -11,9 +11,10 @@ export default function List(props) {
   const listItems = items.map((item) =>
     <ListItem click={props.click}  key={item.id.toString()} item={item}/>
   );
+  const style = {...props.style, ...{listStyleType:'none'}}
 
   return (
-    <ul style={props.style}>
+    <ul style={style}>
       {listItems}
     </ul>
   );

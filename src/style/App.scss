@@ -1,0 +1,14 @@
+@import "~normalize.css";
+@import ":root";
+@import "helpers";
+
+// basic style
+html,
+body,
+#root{
+  min-height: 100%;
+  height: 100%;
+}
+body{
+  color: var(--text-black);
+}

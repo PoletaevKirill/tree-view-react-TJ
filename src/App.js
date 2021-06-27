@@ -1,76 +1,56 @@
-import './App.css';
+import "./style/App.scss"
 import API from "./utils/API";
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
-import List from "./components/List";
-
-
-// Идея: Не использовать сторонний плагин хранилища, т.к. их несколько и выбирать долго и дорого.
-// Создадим пременную содержащую строку аналогичную адресной строке(адресная строка как стейт)
-let Active = ''
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 
 function App() {
-  const [pages, setPages] = useState({});
-  const [list, setList] = useState([])
-
+  const [pages, setPages] = useState([]);
+  const [loader, setLoader] = useState(false)
   useEffect((e) => {
+    setLoader(true)
     API.get('/entities')
       .then(response => {
         if (response.status === 200) {
-          const pages = response.data.pages || {}
-          setPages(pages)
-          setList(Object.values(pages).filter(item => !item.parentId))
+          setPages(response.data.pages || {})
+          // в этом нет необходимости, просто хочу показать лоадер
+          setTimeout(_=>{
+            setLoader(false)
+          }, 700)
         }
       })
   }, []);
 
-  function getLengthPages() {
-    return Object.keys(pages).length
-  }
+  function buildTree(object, id) {
+    let result = [];
+    for (let prop in object) {
+      const item = object[prop]
 
-  function Loader() {
-    return (
-      <div>Loading...</div>
-    )
-  }
+      if (!!item['parentId']) {
+        const parent = object[item.parentId]
+        parent.children = [...parent.children || [], item]
+      }
 
-  function handleClick(id) {
-    const children = Object.values(pages).filter(item => item.parentId === id)
-    if (children.length === 0) return
-
-    const index = list.findIndex(o => o.id === id)
-
-    if (Active && Active.split('/').includes(id)) {
-      Active = Active.replace(`/${id}`, '')
-      list.splice(index + 1, children.length)
-    } else {
-      Active += `/${id}`
-      list.splice(index + 1, 0, ...children)
+      result = Object.values(object).filter(item => !item.parentId)
     }
 
-    setList([...list])
+    return result
   }
 
   return (
-    <div className="App">
-      <header>
-        header
-        {Active}
-      </header>
-      <hr/>
-      <main className="wrapper">
-        <nav className="sidebar">
-          {getLengthPages() === 0 && Loader()}
-          <List style={{textAlign: 'left'}} click={handleClick} items={list}/>
-        </nav>
-        <div className="">
-          Content
+    <div className="flex flex-column height-100">
+        <Header />
+      <main className="flex flex-row flex-grow">
+        <Sidebar loader={loader} />
+        <div className="flex-column flex-grow">
+          <div style={{minHeight: 'calc(100vh - 64px - 120px)'}}>
+          {/*  Пустой блок для симотичности*/}
+          </div>
+          <Footer />
         </div>
-        </main>
-      <hr/>
-      <footer>
-        footer
-      </footer>
+      </main>
     </div>
   );
 }

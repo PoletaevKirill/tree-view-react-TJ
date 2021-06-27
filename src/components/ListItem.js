@@ -5,5 +5,25 @@
  * @constructor
  */
 export default function ListItem(props) {
-  return <li onClick={()=> props.click(props.item.id)}  style={{paddingLeft: props.item.level ? 16 * props.item.level + 'px': null }}>{props.item.title}</li>;
+  function Her() {
+    if(props.item.children){
+      return <div>
+        <span>{props.item.level}  -  </span>
+        {props.item.title}
+      </div>
+    } else {
+      return <div>
+        {props.item.title}
+      </div>
+    }
+
+
+
+
+  }
+
+  return <li onClick={() => props.click(props.item)}
+             style={{marginLeft: props.item.level ? 16 * props.item.level + 'px' : null}}>
+    <Her />
+  </li>;
 }
