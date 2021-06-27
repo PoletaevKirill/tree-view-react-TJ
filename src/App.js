@@ -41,9 +41,9 @@ function App() {
     <div className="flex flex-column height-100">
         <Header />
       <main className="flex flex-row flex-grow">
-        <Sidebar loader={loader} list={buildTree(pages)}/>
+        <Sidebar loader={loader} list={pages}/>
         <div className="flex-column flex-grow">
-          <div style={{minHeight: 'calc(100vh - 64px - 120px)'}}>
+          <div style={{minHeight: 'calc(100vh - var(--header-height) - var(--footer-height))'}}>
           {/*  Пустой блок для симотичности*/}
           </div>
           <Footer />
