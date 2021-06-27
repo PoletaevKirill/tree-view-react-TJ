@@ -1,5 +1,4 @@
-
-export default  [
+const skeletonListPattern = [
   {
     width: '100%',
     height: '16px',
@@ -61,3 +60,5 @@ export default  [
     positionX: '0',
   },
 ]
+
+export default skeletonListPattern

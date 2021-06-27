@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export default function Header({children}) {
-  const Header = styled.header`
+const StyledHeader= styled.header`
     min-height: 64px;
     padding: 0 24px;
     border-bottom: 1px solid var(--primary-color);
     box-sizing: border-box;
   `
 
-  return <Header className="flex align-center">
+export default function Header({children}) {
+  return <StyledHeader className={'flex align-center'}>
     header
-  </Header>
+  </StyledHeader>
 }

@@ -16,9 +16,7 @@ function App() {
         if (response.status === 200) {
           setPages(response.data.pages || {})
           // в этом нет необходимости, просто хочу показать лоадер
-          setTimeout(_=>{
-            setLoader(false)
-          }, 700)
+          setLoader(false)
         }
       })
   }, []);
@@ -43,7 +41,7 @@ function App() {
     <div className="flex flex-column height-100">
         <Header />
       <main className="flex flex-row flex-grow">
-        <Sidebar loader={loader} />
+        <Sidebar loader={loader} list={buildTree(pages)}/>
         <div className="flex-column flex-grow">
           <div style={{minHeight: 'calc(100vh - 64px - 120px)'}}>
           {/*  Пустой блок для симотичности*/}
