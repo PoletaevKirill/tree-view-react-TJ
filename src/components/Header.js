@@ -9,6 +9,6 @@ const StyledHeader= styled.header`
 
 export default function Header({children}) {
   return <StyledHeader className={'flex align-center'}>
-    header
+
   </StyledHeader>
 }

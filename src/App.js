@@ -3,7 +3,7 @@ import API from "./utils/API";
 import React, {useState, useEffect} from 'react'
 
 import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/Sidebar/";
 import Footer from "./components/Footer";
 
 function App() {
@@ -15,27 +15,10 @@ function App() {
       .then(response => {
         if (response.status === 200) {
           setPages(response.data.pages || {})
-          // в этом нет необходимости, просто хочу показать лоадер
           setLoader(false)
         }
       })
   }, []);
-
-  function buildTree(object, id) {
-    let result = [];
-    for (let prop in object) {
-      const item = object[prop]
-
-      if (!!item['parentId']) {
-        const parent = object[item.parentId]
-        parent.children = [...parent.children || [], item]
-      }
-
-      result = Object.values(object).filter(item => !item.parentId)
-    }
-
-    return result
-  }
 
   return (
     <div className="flex flex-column height-100">
