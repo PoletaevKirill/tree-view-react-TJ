@@ -13,11 +13,10 @@ body{
   color: var(--text-black);
 }
 //@todo - убрать отсюда
+
 .active {
-  span{
-    transition: .3s ease;
+  img{
     transform: rotate(90deg);
     display: inline-block;
-    transform-origin: left top;
   }
 }

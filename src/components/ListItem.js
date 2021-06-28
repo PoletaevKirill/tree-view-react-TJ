@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {useState, useEffect} from 'react'
+import ArrowList from '../img/arrow-list.svg'
 
 const StyledLi = styled.li`
   font-size: 14px;
@@ -10,11 +10,9 @@ const Arrow = styled.span`
   position: absolute;
   left: 8px;
   display: inline-block;
-  width: 0;
-  top: 11px;
+  width: 8px;
+  top: 8px;
   height: 0;
-  border: 4px solid transparent;
-  border-left-color: var(--text-black);
 `
 
 /**
@@ -24,23 +22,26 @@ const Arrow = styled.span`
  * @constructor
  */
 export default function ListItem({item, click, active, lastItem = false}) {
-  const activeClass = (val) => (val) ? 'active' : null
+  const activeClass =  (active) ? 'active' : null
+  const styleLeftMargin = {marginLeft: item.level ? 16 * item.level + 'px' : null}
 
-  function Btn() {
-    if (lastItem) {
-      return <div>
-        {item.title}
-      </div>
-    } else {
-      return <div className={activeClass(active)}>
-        <Arrow/>
-        {item.title}
+  return <StyledLi key={item.id}
+                   style={styleLeftMargin}>
+    {
+      lastItem &&
+      <div className={activeClass} onClick={() => click(item)}>
+        <Arrow>
+          <img src={ArrowList} alt="React Logo" width="10" height="10"
+               style={{display: 'inline-block', transition: '.3s ease'}}/>
+        </Arrow>
+        <span>{item.title}</span>
       </div>
     }
-  }
-
-  return <StyledLi onClick={() => click(item)}
-                   style={{marginLeft: item.level ? 16 * item.level + 'px' : null}}>
-    <Btn/>
+    {
+      !lastItem &&
+      <div>
+        <div>{item.title}</div>
+      </div>
+    }
   </StyledLi>;
 }

@@ -20,7 +20,7 @@ export default function List(props) {
 
   useEffect(() => {
     const listArray = Object.values(props.items || {})
-    setList([...listArray.filter(o => !o.parentId)])
+    setList(listArray.filter(o => !o.parentId))
   }, [])
 
   function toggle({id}) {
@@ -28,20 +28,27 @@ export default function List(props) {
 
     if (!active.includes(id)) {
       const children = Object.values(props.items || {}).filter(o => o.parentId === id)
-      active.push(id)
-      list.splice(index + 1, 0, ...children)
+      setActive(prev => [...prev, id])
+      setList(prev => {
+        return [
+          ...prev.slice(0, index + 1),
+          ...children,
+          ...prev.slice(index + 1, list.length)
+        ];
+      })
 
     } else {
       const tempArray = []
-
       let l = function (_id) {
         let result = list.reduce((res, o) => {
-          if (o.parentId === _id) {
+          if (o.parentId === _id) { // находим активных дочек
             res.push(o.parentId)
           }
-          if (active.includes(o.id) && o.parentId === _id) {
+
+          if (active.includes(o.id) && o.parentId === _id) { // спускаемся вниз по ветке
             l(o.id)
           }
+
           return res
         }, tempArray)
 
@@ -51,24 +58,35 @@ export default function List(props) {
 
       list.splice(index + 1, activeTreeNode.length)
 
-      new Set(activeTreeNode).forEach(i=>{
+      setList(prev => {
+        return [
+          ...list
+        ];
+      })
+
+
+      new Set(activeTreeNode).forEach(i => {
         active.splice(active.indexOf(i), 1)
       })
 
       setActive(active)
     }
-    console.log(active, 'active')
-    setList([...list])
+    console.log(active)
   }
 
-  const listItems = list.map((item) =>
-    <ListItem click={toggle} active={active.includes(item.id)} key={item.id} item={item}/>
-  );
-  const style = {...props.style, ...{listStyleType: 'none'}}
+
+  const style = {...props.style}
 
   return (
     <StyledUl style={style}>
-      {listItems}
+      {list.map((item, i) => {
+        //@todo - почему убирая key={i.toString()} ререндерится вообще весь список?????? Весь прикол в ключах? нужно больше ключей богу ключей?
+        //  если так оно и есть, можно ли как то генеировать ключи аля: {item.id+'childComponents1'}, найти примеры.
+
+        const children = Object.values(props.items || {}).filter(o => o.parentId === item.id)
+        return <ListItem key={i.toString()} active={active.includes(item.id)} click={toggle}
+                         lastItem={!!children.length} item={item}/>
+      })}
     </StyledUl>
   );
 }
