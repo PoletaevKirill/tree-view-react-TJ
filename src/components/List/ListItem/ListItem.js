@@ -1,6 +1,6 @@
 import ArrowList from '../../../img/arrow-list.svg'
 import {StyledLi, Arrow} from './styles'
-import {logDOM} from "@testing-library/react";
+import store from "../../../store";
 
 /**
  *
@@ -31,7 +31,11 @@ export default function ListItem({item, click, clickLastChild, active, activeLin
         <div>{item.title}</div>
         {
           activeLink === item.id && item.anchors.map((anc, i) => {
-            return <a key={i.toString()} href="#">{anc}</a>
+            const anchors = store['anchors'][anc]
+
+            return <div key={anchors.id} className="pt-2 pb-2">
+              <a  href={anchors.anchor}>{anchors.title}</a>
+            </div>
           })
         }
       </div>

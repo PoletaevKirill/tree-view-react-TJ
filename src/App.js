@@ -6,9 +6,12 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar/";
 import Footer from "./components/Footer";
 
+import store from './store'
+
 function App() {
   const [pages, setPages] = useState([]);
   const [loader, setLoader] = useState(false)
+
   useEffect((e) => {
     setLoader(true)
     API.get('/entities')
@@ -16,20 +19,21 @@ function App() {
         if (response.status === 200) {
           setPages(response.data.pages || {})
           setLoader(false)
+          store['anchors'] = response.data.anchors
         }
       })
   }, []);
 
   return (
     <div className="flex flex-column height-100">
-        <Header />
+      <Header/>
       <main className="flex flex-row flex-grow">
         <Sidebar loader={loader} list={pages}/>
         <div className="flex-column flex-grow">
           <div style={{minHeight: 'calc(100vh - var(--header-height) - var(--footer-height))'}}>
-          {/*  Пустой блок для симотичности*/}
+            {/*  Пустой блок для симотичности*/}
           </div>
-          <Footer />
+          <Footer/>
         </div>
       </main>
     </div>

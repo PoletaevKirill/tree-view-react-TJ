@@ -19,6 +19,7 @@ export default function List(props) {
     setList(listArray.filter(o => !o.parentId))
   }, [])
 
+
   /**
    * @param id
    */
@@ -51,7 +52,7 @@ export default function List(props) {
         return tempCount
       }, count)
 
-      // Почему то я не могу получить обновленный  list после setList. По этому использую временную переменную
+      // Почему то я не могу получить обновленный list после setList. По этому использую временную переменную
       let tempList = [];
       setList(prev => {
         tempList = [

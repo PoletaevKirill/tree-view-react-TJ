@@ -1,0 +1,21 @@
+//  Быстрая и простая функция для генерации внешних и внутренних отступов
+$countMargin: 10;
+@mixin generatorIndent($name, $property, $level, $indent:4) {
+  @for $i from 0 through $level {
+    .#{$name}-#{$i} {
+      #{$property}: #{$i * $indent}px !important;
+    }
+  }
+}
+
+// margin create
+@include generatorIndent("mt", 'margin-top', 8);
+@include generatorIndent("mr", 'margin-top', 8);
+@include generatorIndent("mb", 'margin-bottom', 8);
+@include generatorIndent("ml", 'margin-left', 8);
+
+// padding create
+@include generatorIndent("pt", 'padding-top', 8);
+@include generatorIndent("pr", 'padding-right', 8);
+@include generatorIndent("pb", 'padding-bottom', 8);
+@include generatorIndent("pl", 'padding-left', 8);
