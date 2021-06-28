@@ -1,13 +1,7 @@
-import ListItem from "./ListItem";
-import styled from "styled-components";
+import ListItem from "./ListItem/ListItem";
 import {useState, useEffect} from 'react'
-import {logDOM} from "@testing-library/react";
+import {StyledUl} from './styles'
 
-const StyledUl = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-`
 /**
  *
  * @param props  - {item: Array}
@@ -38,6 +32,7 @@ export default function List(props) {
       })
 
     } else {
+      // Ужасная реализация, переписать на один обход
       const tempArray = []
       let l = function (_id) {
         let result = list.reduce((res, o) => {
@@ -58,12 +53,7 @@ export default function List(props) {
 
       list.splice(index + 1, activeTreeNode.length)
 
-      setList(prev => {
-        return [
-          ...list
-        ];
-      })
-
+      setList([...list])
 
       new Set(activeTreeNode).forEach(i => {
         active.splice(active.indexOf(i), 1)
@@ -71,7 +61,6 @@ export default function List(props) {
 
       setActive(active)
     }
-    console.log(active)
   }
 
 
@@ -82,7 +71,7 @@ export default function List(props) {
       {list.map((item, i) => {
         //@todo - почему убирая key={i.toString()} ререндерится вообще весь список?????? Весь прикол в ключах? нужно больше ключей богу ключей?
         //  если так оно и есть, можно ли как то генеировать ключи аля: {item.id+'childComponents1'}, найти примеры.
-
+        console.log(item.anchors , item.title)
         const children = Object.values(props.items || {}).filter(o => o.parentId === item.id)
         return <ListItem key={i.toString()} active={active.includes(item.id)} click={toggle}
                          lastItem={!!children.length} item={item}/>

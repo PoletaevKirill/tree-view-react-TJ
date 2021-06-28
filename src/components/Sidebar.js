@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 
-import List from "./List";
-import SkeletonLoader from "./ui/SkeletonLoader";
+import List from "./List/List";
+import SkeletonLoader from "./ui/SkeletonLoader/SkeletonLoader";
 
 const StyledSidebar = styled.nav`
   width: 281px;

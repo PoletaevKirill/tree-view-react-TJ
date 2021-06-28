@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import skeletonListPattern from "../../config/skeletonListPattern";
+import skeletonListPattern from "./skeletonListPattern";
 
 // Можно было сделать проще, например svg или просто просичитать все стилями или DOM построить
 // Но мне надо было хоть чуть-чуть разобраться со 'styled-component'
@@ -31,8 +31,4 @@ const StyledSkeletonLoader = styled.div`
       background-position: 100% 0;
     }
   `
-export default function SkeletonLoader(props) {
-  return (
-    <StyledSkeletonLoader></StyledSkeletonLoader>
-  )
-}
+export {StyledSkeletonLoader}
