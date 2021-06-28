@@ -11,7 +11,9 @@ import {StyledUl} from './styles'
 export default function List(props) {
   const [active, setActive] = useState([])
   const [list, setList] = useState([])
+  const [link, setLink] = useState(false)
 
+  // хук вызывается при хот релоад? Но в доке же говорится что это }, []) дает мне вызов только при маунте...
   useEffect(() => {
     const listArray = Object.values(props.items || {})
     setList(listArray.filter(o => !o.parentId))
@@ -20,10 +22,11 @@ export default function List(props) {
   /**
    * @param id
    */
-  function toggle({id}) {
+  function toggleList({id}) {
     const index = list.findIndex(item => item.id === id)
+    const isIdActive = active.includes(id)
 
-    if (!active.includes(id)) {
+    if (!isIdActive) {
       const children = Object.values(props.items || {}).filter(o => o.parentId === id)
 
       setActive(prev => [...prev, id])
@@ -34,8 +37,9 @@ export default function List(props) {
           ...prev.slice(index + 1, list.length)
         ];
       })
+    }
 
-    } else {
+    if (isIdActive) {
       /**
        * @param _id
        * @param count
@@ -56,11 +60,15 @@ export default function List(props) {
         ];
         return tempList
       })
-      // а еще и костыль с таймаутом. Навеное есть какой то хук?
+      // а еще и костыль с таймаутом. Наверное есть какой то хук?
       setTimeout(_ => {
         setActive(active.filter(i => i !== id && Array.from(tempList, o => o.id).includes(i)))
-      },1)
+      }, 1)
     }
+  }
+
+  function onClickLastChild({id}){
+        setLink(id)
   }
 
 
@@ -72,8 +80,13 @@ export default function List(props) {
         //@todo - почему убирая key={i.toString()} ререндерится вообще весь список?????? Весь прикол в ключах? нужно больше ключей богу ключей?
         //  если так оно и есть, можно ли как то генеировать ключи аля: {item.id+'childComponents1'}, найти примеры.
         const children = Object.values(props.items || {}).filter(o => o.parentId === item.id)
-        return <ListItem key={i.toString()} active={active.includes(item.id)} click={toggle}
-                         lastItem={!!children.length} item={item}/>
+        return <ListItem key={i.toString()}
+                         active={active.includes(item.id)}
+                         activeLink={link}
+                         click={toggleList}
+                         clickLastChild={onClickLastChild}
+                         lastItem={!!children.length}
+                         item={item}/>
       })}
     </StyledUl>
   );

@@ -1,5 +1,6 @@
 import ArrowList from '../../../img/arrow-list.svg'
 import {StyledLi, Arrow} from './styles'
+import {logDOM} from "@testing-library/react";
 
 /**
  *
@@ -7,9 +8,10 @@ import {StyledLi, Arrow} from './styles'
  * @returns {JSX.Element}
  * @constructor
  */
-export default function ListItem({item, click, active, lastItem = false}) {
+export default function ListItem({item, click, clickLastChild, active, activeLink, lastItem = false}) {
   const activeClass =  (active) ? 'active' : null
   const styleLeftMargin = {marginLeft: item.level ? 16 * item.level + 'px' : null}
+
 
   return <StyledLi key={item.id}
                    style={styleLeftMargin}>
@@ -25,8 +27,13 @@ export default function ListItem({item, click, active, lastItem = false}) {
     }
     {
       !lastItem &&
-      <div>
+      <div onClick={()=>clickLastChild(item)}>
         <div>{item.title}</div>
+        {
+          activeLink === item.id && item.anchors.map((anc, i) => {
+            return <a key={i.toString()} href="#">{anc}</a>
+          })
+        }
       </div>
     }
   </StyledLi>;
