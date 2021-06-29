@@ -8,8 +8,7 @@ export default function Sidebar({loader, list}) {
       loader && <SkeletonLoader></SkeletonLoader>
     }
     {
-      !loader && <List style={{textAlign: 'left'}} items={list}/>
+      !loader && <List items={list}/>
     }
-
   </StyledSidebar>
 }

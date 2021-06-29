@@ -11,7 +11,6 @@ import {StyledUl} from './styles'
 export default function List(props) {
   const [active, setActive] = useState([])
   const [list, setList] = useState([])
-  const [link, setLink] = useState(false)
 
   // хук вызывается при хот релоад? Но в доке же говорится что это }, []) дает мне вызов только при маунте...
   useEffect(() => {
@@ -68,24 +67,15 @@ export default function List(props) {
     }
   }
 
-  function onClickLastChild({id}){
-        setLink(id)
-  }
-
-
-  const style = {...props.style}
-
   return (
-    <StyledUl style={style}>
+    <StyledUl>
       {list.map((item, i) => {
         //@todo - почему убирая key={i.toString()} ререндерится вообще весь список?????? Весь прикол в ключах? нужно больше ключей богу ключей?
         //  если так оно и есть, можно ли как то генеировать ключи аля: {item.id+'childComponents1'}, найти примеры.
         const children = Object.values(props.items || {}).filter(o => o.parentId === item.id)
         return <ListItem key={i.toString()}
                          active={active.includes(item.id)}
-                         activeLink={link}
                          click={toggleList}
-                         clickLastChild={onClickLastChild}
                          lastItem={!!children.length}
                          item={item}/>
       })}
