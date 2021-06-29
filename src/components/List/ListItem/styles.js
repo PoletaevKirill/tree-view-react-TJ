@@ -35,10 +35,10 @@ const Arrow = styled.img`
   position: absolute;
   display: inline-block;
   width: 10px;
-  top: 12px;
+  top: 11px;
   height: 10px;
   transform: translateX(-10px) rotate(90deg);
-  transition: transform .25s ease-in-out;
+  transition: transform .2s ease-in-out;
   
   ${StyledItem}.active & {
     transform: translateX(-10px) rotate(180deg);
