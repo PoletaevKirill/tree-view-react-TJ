@@ -11,13 +11,13 @@ import {StyledItem, Arrow, StyledLink, StyledItemTitle, StyledItemAnchor} from '
  */
 export default function ListItem({item, click, active, lastItem = false}) {
   const activeClass = (active) ? 'active' : null
-  const styleLeftPadding = {paddingLeft: item.level ? 16 * (item.level +1) + 'px' : '16px'}
+  const styleLeftPadding = {paddingLeft: item.level ? 16 * (item.level + 1) + 'px' : '16px'}
 
-  const isAnchors = active && item.anchors
-  const ActiveItemWithAnchors = isAnchors ? 'active--with-anchors': null
+  const isAnchors = active && !!item.anchors && item.anchors.length > 0
+  const ActiveItemWithAnchors = isAnchors ? 'active--with-anchors' : null
 
-  const Anchors = ()=>{
-   return  isAnchors && item.anchors.map((anc, i) => {
+  const Anchors = () => {
+    return isAnchors && item.anchors.map((anc, i) => {
       const anchors = store['anchors'][anc]
       return <StyledItemAnchor style={styleLeftPadding} key={anchors.id} className="pt-2 pb-2 anchors">
         <StyledLink href={anchors.anchor}>{anchors.title}</StyledLink>
@@ -28,12 +28,10 @@ export default function ListItem({item, click, active, lastItem = false}) {
   return <li key={item.id}>
     {
       <StyledItem className={`pt-2 pb-2 ${ActiveItemWithAnchors}`} onClick={() => click(item)} style={styleLeftPadding}>
-        {lastItem && <Arrow src={Right}  className={activeClass} alt="React Logo" width="10" height="10"/>}
+        {lastItem && <Arrow src={Right} className={activeClass} alt="React Logo" width="10" height="10"/>}
         <StyledItemTitle className={activeClass}>{item.title}</StyledItemTitle>
       </StyledItem>
     }
-    {
-      <Anchors/>
-    }
+    <Anchors/>
   </li>;
 }

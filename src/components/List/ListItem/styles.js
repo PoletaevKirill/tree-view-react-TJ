@@ -15,6 +15,7 @@ const StyledItem  = styled.div`
     }
   }
 `
+
 const StyledItemAnchor = styled(StyledItem)`
   background: var(--primary-color);
   &:hover{
