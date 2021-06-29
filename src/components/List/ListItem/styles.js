@@ -8,6 +8,7 @@ const StyledItem  = styled.div`
   &:hover{
     background: var(--primary-color)
   }
+  // чет мне не нравится, хотя и имеет место быть
   &.active--with-anchors{
     background: var(--primary-color);
     &:hover{
@@ -24,7 +25,7 @@ const StyledItemAnchor = styled(StyledItem)`
 `
 
 const StyledItemTitle= styled.span`
-  &.active{
+  ${StyledItem}.active & {
     font-weight: 600;
   }
 `
@@ -48,9 +49,6 @@ const Arrow = styled.img`
 const StyledLink = styled.a`
   text-decoration: none;
   color: var(--text-black);
-  &.active{
-    
-  }
 `
 
 export  {Arrow, StyledItem, StyledLink, StyledItemTitle, StyledItemAnchor}
