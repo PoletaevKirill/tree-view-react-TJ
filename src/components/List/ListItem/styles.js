@@ -38,7 +38,8 @@ const Arrow = styled.img`
   height: 10px;
   transform: translateX(-10px) rotate(90deg);
   transition: transform .25s ease-in-out;
-  &.active{
+  
+  ${StyledItem}.active & {
     transform: translateX(-10px) rotate(180deg);
     display: inline-block;
   }

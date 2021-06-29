@@ -27,8 +27,8 @@ export default function ListItem({item, click, active, lastItem = false}) {
 
   return <li key={item.id}>
     {
-      <StyledItem className={`pt-2 pb-2 ${ActiveItemWithAnchors}`} onClick={() => click(item)} style={styleLeftPadding}>
-        {lastItem && <Arrow src={Right} className={activeClass} alt="React Logo" width="10" height="10"/>}
+      <StyledItem className={`pt-2 pb-2 ${activeClass} ${ActiveItemWithAnchors} `} onClick={() => click(item)} style={styleLeftPadding}>
+        {lastItem && <Arrow src={Right}  alt="React Logo" width="10" height="10"/>}
         <StyledItemTitle className={activeClass}>{item.title}</StyledItemTitle>
       </StyledItem>
     }
