@@ -1,7 +1,7 @@
 @import "~normalize.css";
 @import ":root";
 @import "helpers";
-
+@import "fonts/Open_Sans";
 // basic style
 html,
 body,
@@ -11,12 +11,13 @@ body,
 }
 body{
   color: var(--text-black);
+  font-family: "Open Sans";
 }
 //@todo - убрать отсюда
 
 .active {
   img{
-    transform: rotate(90deg);
+    transform: translateY(-50%) rotate(180deg);
     display: inline-block;
   }
 }
