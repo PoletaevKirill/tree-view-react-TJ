@@ -25,10 +25,5 @@ const StyledSkeletonLoader = styled.div`
     background-position: ${backgroundPosition};
     background-size: ${backgroundSize};
   }
-
-  @keyframes shine {
-    to {
-      background-position: 100% 0;
-    }
   `
 export {StyledSkeletonLoader}
