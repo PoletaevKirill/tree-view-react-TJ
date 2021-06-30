@@ -18,6 +18,7 @@ const StyledItem  = styled.div`
 `
 
 const StyledItemAnchor = styled(StyledItem)`
+  //@todo - Дубль с 13 строки, найти решение. Мб вынести в переменную или какой то миксим
   background: var(--primary-color);
   &:hover{
     background: var(--secondary-color);

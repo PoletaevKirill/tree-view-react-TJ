@@ -13,7 +13,7 @@ import {StyledItem, Arrow, StyledLink, StyledItemTitle, StyledItemAnchor} from '
  * @returns {JSX.Element}
  * @constructor
  */
-export default function ListItem({item, click, active = false, lastItem = false}) {
+export default function Index({item, click, active = false, lastItem = false}) {
   const activeClass = (active) ? 'active' : null
   const styleLeftPadding = {paddingLeft: item.level ? 16 * (item.level + 1) + 'px' : '16px'}
 

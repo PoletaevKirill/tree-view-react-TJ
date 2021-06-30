@@ -1,4 +1,4 @@
-import ListItem from "./ListItem/ListItem";
+import ListItem from "./ListItem";
 import {useEffect, useReducer} from 'react'
 import {StyledUl} from './styles'
 import {reducer, initialState} from "./reducer";
@@ -10,7 +10,7 @@ import {reducer, initialState} from "./reducer";
  * @returns {JSX.Element}
  * @constructor
  */
-export default function List(props) {
+export default function Index(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
