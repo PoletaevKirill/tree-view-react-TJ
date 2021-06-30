@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
-const StyledItem  = styled.div`
+const StyledItem = styled.div`
   font-size: 14px;
   position: relative;
   cursor: pointer;
   transition: background .25s ease-in-out;
-  &:hover{
+
+  &:hover {
     background: var(--primary-color)
   }
+
   // чет мне не нравится, хотя и имеет место быть
-  &.active--with-anchors{
+  &.active--with-anchors {
     background: var(--primary-color);
-    &:hover{
+
+    &:hover {
       background: var(--secondary-color);
     }
   }
@@ -20,12 +23,13 @@ const StyledItem  = styled.div`
 const StyledItemAnchor = styled(StyledItem)`
   //@todo - Дубль с 13 строки, найти решение. Мб вынести в переменную или какой то миксим
   background: var(--primary-color);
-  &:hover{
+
+  &:hover {
     background: var(--secondary-color);
-  } 
+  }
 `
 
-const StyledItemTitle= styled.span`
+const StyledItemTitle = styled.span`
   ${StyledItem}.active & {
     font-weight: 600;
   }
@@ -40,7 +44,7 @@ const Arrow = styled.img`
   height: 10px;
   transform: translateX(-10px) rotate(90deg);
   transition: transform .2s ease-in-out;
-  
+
   ${StyledItem}.active & {
     transform: translateX(-10px) rotate(180deg);
     display: inline-block;
@@ -52,4 +56,4 @@ const StyledLink = styled.a`
   color: var(--text-black);
 `
 
-export  {Arrow, StyledItem, StyledLink, StyledItemTitle, StyledItemAnchor}
+export {Arrow, StyledItem, StyledLink, StyledItemTitle, StyledItemAnchor}

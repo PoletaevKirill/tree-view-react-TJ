@@ -1,4 +1,5 @@
 const initialState = {list: [], active: []};
+
 function reducer(state, action) {
   switch (action.type) {
     case 'setList':

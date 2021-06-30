@@ -9,5 +9,6 @@ const StyledFooter = styled.footer`
 
 export default function Footer({children}) {
   return <StyledFooter className={'flex align-center'}>
+    {/*{children}*/}
   </StyledFooter>
 }

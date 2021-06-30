@@ -6,11 +6,12 @@
 // basic style
 html,
 body,
-#root{
+#root {
   min-height: 100%;
   height: 100%;
 }
-body{
+
+body {
   color: var(--text-black);
   font-family: "Open Sans";
 }

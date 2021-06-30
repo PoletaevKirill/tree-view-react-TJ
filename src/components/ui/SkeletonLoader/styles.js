@@ -18,12 +18,12 @@ const backgroundSize = pattern.map(({width, height}, index) => {
 }).join(',')
 
 const StyledSkeletonLoader = styled.div`
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-image: ${backgroundImage};
-    background-position: ${backgroundPosition};
-    background-size: ${backgroundSize};
-  }
-  `
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: ${backgroundImage};
+  background-position: ${backgroundPosition};
+  background-size: ${backgroundSize};
+}
+`
 export {StyledSkeletonLoader}
