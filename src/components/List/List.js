@@ -5,7 +5,8 @@ import {reducer, initialState} from "./reducer";
 
 /**
  *
- * @param props  - {items: Array}
+ * @param {Object} props
+ * @param {Array} props.items
  * @returns {JSX.Element}
  * @constructor
  */
@@ -16,7 +17,6 @@ export default function List(props) {
     const listArray = Object.values(props.items || {})
     dispatch({type: 'setList', list: listArray.filter(o => !o.parentId)})
   }, [props.items])
-
 
   function toggleList({id}) {
     const index = state.list.findIndex(item => item.id === id)
@@ -37,7 +37,7 @@ export default function List(props) {
       {
         state.list.map((item, i) => {
           const children = Object.values(props.items || {}).filter(o => o.parentId === item.id)
-          return <ListItem key={i.toString()}
+          return <ListItem key={item.id}
                            active={state.active.includes(item.id)}
                            click={toggleList}
                            lastItem={!!children.length}
