@@ -6,12 +6,12 @@ function reducer(state, action) {
       return {...state, list: [...action.list]};
     case 'openList':
       return {
+        ...state,
         list: [
           ...state.list.slice(0, action.index + 1),
           ...action.children,
           ...state.list.slice(action.index + 1, state.list.length)
         ],
-        active: [...state.active, action.id]
       };
     case 'cLoseList':
       /**
@@ -25,12 +25,19 @@ function reducer(state, action) {
         return tempCount
       }, count)
       return {
+        ...state,
         list: [
           ...state.list.slice(0, action.index + 1),
           ...state.list.slice(action.index + 1 + countActiveChildById(action.id), state.list.length)
-        ],
-        active: [...state.active.filter(id => id !== action.id && Array.from(state.list, o => o.id).includes(id))]
+        ]
       };
+    case 'addActiveItem':
+      return {...state, active: [...state.active, action.id]}
+    case 'removeActiveItem':
+      return {
+        ...state,
+        active: [...state.active.filter(id => id !== action.id && Array.from(state.list, o => o.id).includes(id))]
+      }
     default:
       throw new Error();
   }

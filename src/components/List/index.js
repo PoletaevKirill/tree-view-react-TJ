@@ -25,10 +25,12 @@ export default function Index(props) {
     if (!isIdActive) {
       const children = Object.values(props.items || {}).filter(o => o.parentId === id)
       dispatch({type: "openList", children, index, id})
+      dispatch({type:"addActiveItem", id})
     }
 
     if (isIdActive) {
       dispatch({type: "cLoseList", index, id})
+      dispatch({type:"removeActiveItem", id})
     }
   }
 
