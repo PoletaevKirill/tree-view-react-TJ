@@ -1,6 +1,8 @@
 #
 Для быстрого старта я использовал create-react-app
 
+[![Пример работы списка:](https://api.monosnap.com/file/download?id=7uU9xmdfFYXhCylRnzQ1I3303UOsfz)](https://api.monosnap.com/file/download?id=7uU9xmdfFYXhCylRnzQ1I3303UOsfz)
+
 ## Доступные скрипты
 
 В каталоге проекта вы можете запустить:
